@@ -38,6 +38,9 @@ arşivi `backups/` altında; yayın paketleri özel hesap verisi içermez.
 13. Server kaynakları oyun dosyalarından ayrı tutuldu. Mobil ve masaüstündeki yerel
     server kopyaları da aynı bağlantı/otorite koduyla güncellendi.
 
+14. Online odadan ayrılınca solo NPC ödülünü engelleyen koşul düzeltildi. Native
+    online ödül tekrar yerelde yazılmaz; yeniden bağlantıda sahte +$50 gösterilmez.
+
 ## Korunanlar
 
 Harita ve yollar, araç sayısı/ID'leri, araç/human/landmark model dosyaları,
@@ -54,5 +57,7 @@ veritabanı kullanılmaz. Render'ın kendi kullanım kotaları ve aşım davran�
 belgesinde açıklanır. Sınırsız uptime/oyuncu sayısı/ücretsiz trafik garantisi yoktur.
 
 Gerçek yayın bilgisi MULTIPLAYER-KURULUM.md'de tutulur. Sahte URL config'e eklenmez.
-GitHub/Render yüklemesi, kullanıcı talebiyle diğer işler tamamlandıktan sonra yapılır.
+GitHub kaynak deposu ve Render Free sunucusu gerçekten yayınlandı. İki oyun
+paketinde gerçek sunucu URL'si dolduruldu. Netlify'de üretim yayınları kredi kotası
+nedeniyle duraklatıldığı için canlı oyun yüklemesi yapılmadı.
 CrazyGames oyun bağlantısı henüz olmadığı için onun gerçek iframe origin'i beklenir.
