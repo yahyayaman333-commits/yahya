@@ -1,0 +1,9 @@
+import {collides} from '../src/player.js';
+import {createColliderGrid} from '../src/collider-grid.js';
+export function polygonContains(x,z,points){let inside=false;for(let i=0,j=points.length-1;i<points.length;j=i++){const a=points[i],b=points[j];if((a[1]>z)!==(b[1]>z)&&x<(b[0]-a[0])*(z-a[1])/(b[1]-a[1])+a[0])inside=!inside;}return inside;}
+export function playableAt(x,z,world){if(x>=1670&&x<=1679&&z>=301&&z<=307||polygonContains(x-1703,z-304,world.island||[[-19,-24],[19,-24],[25,-18],[25,18],[19,24],[-19,24],[-25,18],[-25,-18]]))return true;if(x>=-101&&x<=830&&z>=-146&&z<=146||x>=816&&x<=2061&&z>=-86&&z<=86)return true;if(x>=1000&&x<=1900&&z>=65){if(x>=1472&&x<=1478&&z<=144)return true;return z<=126+Math.sin(x*.011)*2.4+Math.sin(x*.045)*.65;}return polygonContains(x,z,world.peninsula);}
+export function createNavigation(world){const outside=createColliderGrid(world.colliders),rooms=Object.fromEntries(Object.entries(world.rooms).map(([id,r])=>[id,createColliderGrid(r.colliders)]));return {
+ height(x,z){return world.heights?.[`${Math.floor(x/2)},${Math.floor(z/2)}`]??.3;},
+ environment(location){return {colliders:location==='outside'?world.colliders:world.rooms[location]?.colliders||[],bounds:location==='outside'?{...world.bounds,contains:(x,z)=>playableAt(x,z,world)}:world.rooms[location]?.bounds,heightAt:()=>0};},
+ path(a,b){if(a.location!==b.location)return true;const grid=b.location==='outside'?outside:rooms[b.location];if(!grid)return false;const count=Math.max(1,Math.ceil(Math.hypot(b.x-a.x,b.z-a.z)/.6));for(let i=1;i<=count;i++){const t=i/count,x=a.x+(b.x-a.x)*t,z=a.z+(b.z-a.z)*t,y=a.y+(b.y-a.y)*t;const solid=grid.at(x,z).filter(c=>(c.maxY??((c.baseY??0)+(c.height??100)))>y+.3&&c.label!=='interior visitor');const bounds=b.location==='outside'?{...world.bounds,contains:(x,z)=>playableAt(x,z,world)}:world.rooms[b.location].bounds;if(collides(x,z,solid,.18,bounds))return false;}return true;}
+};}
