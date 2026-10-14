@@ -1,0 +1,13 @@
+{
+  "transport": "real HTTP and WebSocket on localhost, shipped map and NPCs",
+  "players": 25,
+  "rooms": 5,
+  "seconds": 11.7250842,
+  "snapshots": 3274,
+  "bytesReceived": 11737813,
+  "kilobytesPerSecond": 1001.0856041443183,
+  "cpuMs": 889,
+  "rssMB": 132.509696,
+  "eventLoopP95Ms": 17.612799,
+  "renderFreeTested": false
+}
