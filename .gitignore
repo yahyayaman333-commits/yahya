@@ -1,0 +1,10 @@
+node_modules/
+.env
+.env.*
+!.env.example
+private-data/
+data/
+test-private-*/
+*.log
+*.zip
+.DS_Store
