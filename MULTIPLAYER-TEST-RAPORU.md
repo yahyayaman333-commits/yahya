@@ -1,7 +1,7 @@
 # Multiplayer test raporu — 14 Ekim 2026
 
-Sonuçlar, gerçekten çalıştırılmış yerel testlere aittir. Render/CrazyGames/internet
-sonucu, ayrıca gerçekleştirilmeden başarılı sayılmadı.
+Sonuçlar, gerçekten çalıştırılmış yerel ve aşağıda ayrı belirtilen canlı Render
+internet testlerine aittir. CrazyGames ve fiziksel cihaz testleri başarılı sayılmadı.
 
 ## Otomatik kontroller
 
@@ -21,9 +21,10 @@ sonucu, ayrıca gerçekleştirilmeden başarılı sayılmadı.
 | Soğuk başlangıç | Geciken sunucu simülasyonu; health retries, iptal, timeout ve yasak origin terminal hatası; geçti |
 | Paket tekrarları | Disconnect bekleyen işlemi reddeder; eski satın alma/ateş/yarış paketi tekrar gönderilmez; geçti |
 | Solo/SDK | Networking yalnızca multiplayer girişinde yüklenir; SDK başarısızlığı oyunu durdurmaz; geçti |
+| Online'dan solo'ya dönüş | Ayrıldıktan sonra NPC ödülü solo bankaya bir kez ödenir; bağlıyken iki kez ödeme ve reconnect sırasında sahte ödeme yok; üç ekonomi testi geçti |
 | Ağ tasarrufu | Idle 2 Hz, uzak kare throttling, değişmeyen kare bastırma, sparse snapshot koruma; geçti |
 
-Sunucu tam süiti 18/18 geçti. Mobil tam süit 449/449, masaüstü tam süit 433/433 geçti. Son loglar
+Sunucu tam süiti 18/18 geçti. Mobil tam süit 452/452, masaüstü tam süit 436/436 geçti. Son loglar
 work/render-mobile-tests-final.log ve work/render-desktop-tests-final.log altında. Son odaklı multiplayer/SDK
 kontrolleri 31/31 geçti. Başarısız ilk denemeler düzeltildi; başarı satırları son
 geçen çalıştırmaya aittir. Build'ler tamamlandı; Vite'ın büyük JS chunk uyarısı
@@ -60,12 +61,32 @@ Bu bir fiziksel Android/iPhone testi veya CrazyGames portal testi değildir.
 149 aktif grafik/font/ses dosyasının hash'i önceki oyun paketiyle eşleşti.
 Harita/model/grafik kalitesinde düşürme yapılmadı.
 
+## Gerçek Render internet testleri
+
+14 Ekim: Node 22.22.0 / Frankfurt / Free. 25 sentetik WSS oyuncu, 5 oda,
+6. oyuncu reddi, 25 eşzamanlı araç, oda sohbet izolasyonu, hatalı origin reddi,
+server countdown, iki yarış bitişi/500–250 dolar ödül, PvP ölümü/respawn, sahte
+para reddi ve ayrılma geçti. Sonunda rooms:0 / players:0 doğrulandı.
+
+Gerçek Render Restart service işlemi sırasında iki SecureRoom istemcisi bağlıydı.
+İkisi otomatik döndü; boot değişti, bakiye 50→100 reseti açık bildirildi,
+PvP kapatma tercihi korundu. İlk deneme manuel restart tetiklenmeden süresi
+doldu; yeniden çalıştırılan gerçek restart testi başarılıdır.
+
+Kanıt JSON: work/live-render-report.json ve live-render-reconnect-report.json.
+Yayımlanmış GitHub kaynakları tekrar indirildi; 18/18 sunucu testi geçti.
+Bunlar gerçek internet testleridir; fiziksel telefon veya gerçek CrazyGames
+iframe oyun testi değildir.
+
 ## Henüz başarılı olarak işaretlenmeyenler
 
-- Render Free üzerinde gerçek internet iki oyuncu/yük testi ve gerçek 15 dakikalık uyku.
-- Netlify'deki canlı oyun dosyalarının güncellenmesi ve iki ayrı fiziksel cihaz/ağ.
+- Render Free üzerinde gerçekten 15 dakika trafiksiz bekletip uyutma testi;
+  startup/restart beklemesi ve soğuk başlangıç simülasyonu ayrıca geçti.
+- Netlify canlı oyun güncellemesi: üretim yayınları kredi kotası nedeniyle duraklatılmış.
+- İki ayrı fiziksel cihaz/ağ üzerinde oynama.
 - CrazyGames gerçek oyun iframe origin'i/portal testi; oyun URL'si henüz yok.
 - Kalıcı ücretsiz online depolama; bilinçli olarak sağlanmadı.
 - Uzun süreli 25 oyunculu soak, geniş anti-cheat saldırı analizi ve gerçek telefon FPS.
 
-Yayın sonunda gerçekten yapılan canlı kontroller bu listeye ayrı sonuçlarla eklenir.
+Canlı sunucu gerçekten yayınlandı. Portal/fiziksel cihaz kontrolleri ve uzun süreli
+soak başarılıymış gibi işaretlenmedi.
