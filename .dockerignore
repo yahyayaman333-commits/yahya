@@ -1,0 +1,8 @@
+node_modules
+private-data
+data
+*.zip
+.git
+.env
+.env.*
+test-private-*
