@@ -19,11 +19,27 @@ karakter modelleri, grafik profilleri, sesler ve tek oyunculu kayıt korunur.
 
 ## Gerçek yayın durumu
 
-Yayınlama en son yapılacak. Şu an gerçek bir sunucu URL'si bu belgeye veya oyun
-config'ine yazılmadı. GitHub hesabı ve Render oturumu doğrulandı; GitHub bağlantısı
-contents yazma işleminde 403 döndü. Chrome dosya yüklemesi de uzantının dosya
-erişimi kapalı olduğu için durdu. Yerel kaynak, testler ve dağıtım ayarları hazır.
-Yayın gerçekleşirse bu bölüm gerçek URL, commit ve canlı testlerle güncellenir.
+Sunucu **gerçekten yayınlandı**: [https://sultanahmet-multiplayer.onrender.com](https://sultanahmet-multiplayer.onrender.com/health).
+[GitHub kaynak deposu](https://github.com/yahyayaman333-commits/yahya); çalıştırılan runtime commit'i
+`d0023ce75fd8a69bd69d24c7c6b6f6b01414656e`. Render servis kimliği
+`srv-db7pfj3ncjis73f4o0o0`; Frankfurt, Node 22.22.0, Free 0.1 CPU / 512 MB.
+Sağlık kontrolü /health ve TLS/WSS canlı olarak doğrulandı.
+
+Her iki oyun paketindeki multiplayer-config.json gerçek sunucu adresine bağlandı.
+Gerçek internet üzerinde 25 sentetik oyuncu/beş oda, eşzamanlı sürüş, oda izolasyonu,
+yarış bitişleri/500–250 ödülleri, PvP ölümü/yeniden doğma, sahte para reddi ve iki
+istemciyle gerçek Render restart/otomatik dönüş testleri geçti. Özel token veya
+anahtar yayımlanmadı. GitHub'daki 39 dosya indirildi, satır sonu farkları dışında
+kaynakla eşleşti; yayımlanmış kaynakta da 18/18 sunucu testi geçti.
+
+**Netlify canlı oyun güncellemesi yapılamadı.** Hesap ekranı üretim yayınlarını
+kredi kotası nedeniyle duraklatılmış gösteriyor. Görünen İstanbul projesi Galata
+İstanbul adlı başka bir oyun; üzerine Sultanahmet yüklenmedi. Yeni mobil paket
+hazırdır. Kota yenilendiğinde doğru Sultanahmet projesine veya yeni statik projeye
+paketi yükle; gerçek oyun origin'i aşağıdaki listeden farklıysa Render'ın
+ALLOWED_ORIGINS listesine o exact HTTPS origin'i ekle. Ücretli yükseltme yapılmadı.
+CrazyGames bağlantısı henüz yok; bu yüzden portal testi ve ona özgü gerçek iframe
+origin doğrulaması yapılmadı.
 
 ## Render Free — GitHub üzerinden
 
